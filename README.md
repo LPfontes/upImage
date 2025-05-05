@@ -32,8 +32,8 @@ Before running the application, ensure you have the following installed:
 
 1.  **Clone the repository (if you have the code in a repository):**
     ```bash
-    git clone <repository_url>
-    cd <project_directory>
+    git clone https://github.com/LPfontes/upImage.git
+    cd upImage
     ```
 
 2.  **Create a virtual environment (recommended):**
