@@ -19,8 +19,8 @@ def upScale(image, scale, interpolation):
     else:
         raise ValueError('Invalid interpolation method.')
 
-    if scale not in [2, 4]:
-        raise ValueError('Invalid scale factor. Only 2x and 4x are supported.')
+    if scale not in [2,3, 4]:
+        raise ValueError('Invalid scale factor. Only 2x, 3x and 4x are supported.')
 
     resized_image = cv2.resize(image, None, fx=scale, fy=scale, interpolation=interpolation)
     return resized_image

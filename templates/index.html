@@ -63,7 +63,7 @@
 
             <div class="grid-select-container">
                 <div class="form-select-container">
-                    <label for="{{ formAI.scales.id_for_label }}">{{ formAI.scale.label }}</label>
+                    <label for="{{ formAI.scale.id_for_label }}">{{ formAI.scale.label }}</label>
                     {{ formAI.scale }}
                     {% for error in formAI.scale.errors %}
                         <p class="error">{{ error }}</p>
@@ -84,6 +84,31 @@
             </div>
         </form>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const modelSelect = document.getElementById('id_model');
+            modelSelect.addEventListener('change', function() {
+                const selectedValue = this.value;
+                const scaleSelect = document.getElementById('id_scaleIA');
+                const options = scaleSelect.options;
+                if (selectedValue === 'LapSRN') {
+                scaleSelect.innerHTML = `
+                    <option value="2">2x</option>
+                    <option value="4">4x</option>
+                    <option value="8">8x</option>
+                `;
+                } else {
+                    scaleSelect.innerHTML = `
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                    `;
+                }
+            });
+        });
+       
 
+        </script>
+        
 </body>
 </html>
