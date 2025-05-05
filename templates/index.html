@@ -1,16 +1,89 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
     <title>Enviar Imagem</title>
     <link rel="stylesheet" type="text/css" href="{% static '/styles.css' %}">
 </head>
 <body>
-    <h2>Enviar Imagem</h2>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Enviar</button>
-    </form>
+
+    <!-- Formulário tradicional -->
+    <div class="form-container">
+        <form method="post" enctype="multipart/form-data">
+            <h2>Upscale</h2>
+            {% csrf_token %}
+
+            <div class="form-input-container">
+                <input type="hidden" name="form_type" value="normal">
+                <label for="{{ form.imagem.id_for_label }}">Arquivo {{ form.imagem.label }}</label>
+                {{ form.imagem }}
+                {% for error in form.imagem.errors %}
+                    <p class="error">{{ error }}</p>
+                {% endfor %}
+            </div>
+
+            <div class="grid-select-container">
+                <div class="form-select-container">
+                    <label for="{{ form.interpolation.id_for_label }}">{{ form.interpolation.label }}</label>
+                    {{ form.interpolation }}
+                    {% for error in form.interpolation.errors %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+    
+                <div class="form-select-container">
+                    <label for="{{ form.scales.id_for_label }}">{{ form.scale.label }}</label>
+                    {{ form.scale }}
+                    {% for error in form.scales.errors %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="form-button">
+                <button type="submit">Enviar</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Formulário com IA -->
+    <div class="form-container">
+        <form method="post" enctype="multipart/form-data">
+            <h2>Upscale IA</h2>
+            {% csrf_token %}
+
+            <div class="form-input-container">
+                <input type="hidden" name="form_type" value="AI">
+                <label for="{{ formAI.imagem.id_for_label }}">Arquivo {{ formAI.imagem.label }}</label>
+                {{ formAI.imagem }}
+                {% for error in formAI.imagem.errors %}
+                    <p class="error">{{ error }}</p>
+                {% endfor %}
+            </div>
+
+            <div class="grid-select-container">
+                <div class="form-select-container">
+                    <label for="{{ formAI.scales.id_for_label }}">{{ formAI.scale.label }}</label>
+                    {{ formAI.scale }}
+                    {% for error in formAI.scale.errors %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div class="form-select-container">
+                    <label for="{{ formAI.models.id_for_label }}">{{ formAI.model.label }}</label>
+                    {{ formAI.model }}
+                    {% for error in formAI.model.errors %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="form-button">
+                <button type="submit">Enviar</button>
+            </div>
+        </form>
+    </div>
+
 </body>
 </html>
